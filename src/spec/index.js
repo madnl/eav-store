@@ -39,9 +39,7 @@ export const objectMap = <K, V>(
   value
 });
 
-export const constant = <T: string | number | boolean, X: $Subtype<T>>(
-  value: X
-): Spec<X> => ({
+export const constant = <T: string, X: $Subtype<T>>(value: X): Spec<X> => ({
   type: 'constant',
   value
 });

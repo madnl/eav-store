@@ -1,2 +1,6 @@
 [include]
 src/
+
+[options]
+suppress_comment=\\(.\\|\n\\)*\\$ExpectError
+include_warnings=true
