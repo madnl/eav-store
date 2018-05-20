@@ -23,9 +23,9 @@ export const arrayOf = <ItemT>(itemType: Spec<ItemT>): Spec<Array<ItemT>> => ({
 
 type TypeOfSpec = <T>(spec: Spec<T>) => T;
 
-export const shape = <Shape: { [fieldName: string]: Spec<any> }>(
+export const shape = <Shape: $Subtype<{ [fieldName: string]: Spec<any> }>>(
   fields: Shape
-): Spec<$Exact<$ObjMap<Shape, TypeOfSpec>>> => ({
+): Spec<$ReadOnly<$Exact<$ObjMap<Shape, TypeOfSpec>>>> => ({
   type: 'shape',
   fields
 });
@@ -39,7 +39,7 @@ export const objectMap = <K, V>(
   value
 });
 
-export const constant = <T: string, X: $Subtype<T>>(value: X): Spec<X> => ({
+export const constant = <X: $Subtype<string>>(value: X): Spec<X> => ({
   type: 'constant',
   value
 });
