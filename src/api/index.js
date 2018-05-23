@@ -9,12 +9,12 @@ export opaque type EntityId<E> = string;
 export opaque type Attribute<E, V> = {
   propertyId: string,
   entity: Entity<E>,
-  initialValue: V
+  defaultValue: V
 };
 
 type AttributeOptions<V> = {
   spec: Spec<V>,
-  initialValue: V
+  defaultValue: V
 };
 
 export interface Entity<E> {
@@ -50,10 +50,13 @@ class EntityImpl<E: string> implements Entity<E> {
     return {
       propertyId: this._nameGenerator(),
       entity: this,
-      initialValue: options.initialValue
+      defaultValue: options.defaultValue
     };
   }
 }
+
+export const defaultValue = <E, V>(attribute: Attribute<E, V>): V =>
+  attribute.defaultValue;
 
 export interface Store {
   get<E, V>(entityId: EntityId<E>, attribute: Attribute<E, V>): V;
